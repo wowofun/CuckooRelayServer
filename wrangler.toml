@@ -5,4 +5,4 @@ compatibility_date = "2024-02-24"
 [[d1_databases]]
 binding = "DB" # This matches 'env.DB' in the code
 database_name = "cuckoos-db"
-database_id = "" # Will be filled by the user or script
+database_id = "35357949-e633-4276-a68b-93691cc6bfec" # Will be filled by the user or script

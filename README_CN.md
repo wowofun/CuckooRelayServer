@@ -72,6 +72,7 @@ sequenceDiagram
 
 2.  或者**手动运行部署脚本:**
     ```bash
+    chmod +x deploy.sh
     ./deploy.sh
     ```
 3.  按照屏幕提示操作即可。

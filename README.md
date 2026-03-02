@@ -68,6 +68,7 @@ Free, fast, and requires zero maintenance.
 
 1.  **Run the deployment script:**
     ```bash
+    chmod +x deploy.sh
     ./deploy.sh
     ```
 2.  Follow the instructions on screen.

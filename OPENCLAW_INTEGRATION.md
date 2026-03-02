@@ -119,11 +119,49 @@ async function pollMessages() {
 pollMessages();
 ```
 
+## 3. Demo Script (Ready-to-Use)
+
+We provide a ready-to-use Node.js script `openclaw-demo.js` in the repository.
+
+1.  **Install Dependencies**:
+    ```bash
+    npm install
+    ```
+2.  **Run the Demo**:
+    ```bash
+    # Replace with your actual URL and Key
+    SERVER_URL="https://your-relay.workers.dev" \
+    KEY="my-secret-password" \
+    node openclaw-demo.js
+    ```
+3.  **Interact**:
+    - The script will start polling for messages.
+    - Type in the console to send messages to the channel.
+
 ---
 
 # 中文说明
 
 本说明介绍如何将 **OpenClaw**（或任意第三方机器人/系统）接入 Cuckoo Relay Server，实现实时发送与接收消息。
+
+## 3. 开箱即用演示脚本
+
+仓库中提供了一个开箱即用的 Node.js 脚本 `openclaw-demo.js`。
+
+1.  **安装依赖**:
+    ```bash
+    npm install
+    ```
+2.  **运行演示**:
+    ```bash
+    # 请替换为你的实际 URL 和 Key
+    SERVER_URL="https://your-relay.workers.dev" \
+    KEY="my-secret-password" \
+    node openclaw-demo.js
+    ```
+3.  **交互**:
+    - 脚本会自动开始轮询消息。
+    - 在控制台输入文字即可向频道发送消息。
 
 ## 概述
 

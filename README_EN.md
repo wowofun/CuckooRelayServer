@@ -87,14 +87,16 @@ sequenceDiagram
 
 3. Run the deployment script:
    ```bash
+   chmod +x deploy.sh
    ./deploy.sh
    ```
 
 4. The script will automatically:
    - Create a D1 database.
-   - Apply the schema.
    - Deploy the worker code.
    - Output your Server URL.
+   
+   *Note: Database tables are auto-initialized on first use.*
 
 ## App Configuration
 

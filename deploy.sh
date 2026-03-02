@@ -68,9 +68,9 @@ else
 fi
 
 
-# 4. Apply Schema
-echo "🏗️ Applying database schema..."
-$WRANGLER d1 execute $DB_NAME --file=schema.sql --remote
+# 4. Apply Schema (Optional, code now auto-inits, but good for safety)
+# echo "🏗️ Applying database schema..."
+# $WRANGLER d1 execute $DB_NAME --file=schema.sql --remote
 
 # 5. Deploy Worker
 echo "🚀 Deploying Worker..."
