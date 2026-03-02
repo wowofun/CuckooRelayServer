@@ -3,7 +3,7 @@ node_modules
 .wrangler
 dist
 .env
-wrangler.toml
+wrangler.secret.toml
 data
 *.db
 test-relay.sh
