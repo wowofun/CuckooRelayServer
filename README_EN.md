@@ -10,6 +10,7 @@ This is the official self-hosted relay server for the Cuckoos iOS App. By deploy
 
 ## Table of Contents
 - [Features](#features)
+- [How It Works](#how-it-works)
 - [Deployment Guide](#deployment-guide)
   - [Option 1: One-Click Button](#option-1-one-click-button-recommended)
   - [Option 2: Command Line](#option-2-command-line-for-developers)
@@ -25,6 +26,41 @@ This is the official self-hosted relay server for the Cuckoos iOS App. By deploy
 - **Privacy First**: Messages are isolated by your secret Connection Key.
 - **No Maintenance**: Serverless architecture, no servers to manage.
 - **One-Click Deploy**: Setup in under 2 minutes.
+
+## How It Works
+
+### 1. Channel Isolation
+Your **Connection Key** is the only thing that defines a "Chat Room". It is hashed into a unique Channel ID, ensuring that only people with the same key can communicate.
+
+```mermaid
+graph TD
+    Key[Connection Key: "my-secret-password"] -->|SHA-256 Hash| ChannelID[Channel ID: "a8f3..."]
+    UserA[User A] -->|Uses Key| ChannelID
+    UserB[User B] -->|Uses Key| ChannelID
+    
+    ChannelID -->|Isolated| Messages[(Messages Database)]
+    
+    style Key fill:#f9f,stroke:#333,stroke-width:2px
+    style ChannelID fill:#bbf,stroke:#333,stroke-width:2px
+```
+
+### 2. Message Flow
+The server acts as a relay. It receives encrypted messages and holds them until recipients pick them up via Long Polling.
+
+```mermaid
+sequenceDiagram
+    participant UserA as User A (Sender)
+    participant Server as Relay Server
+    participant UserB as User B (Receiver)
+
+    Note over UserA: Encrypts Audio/Text
+    UserA->>Server: POST /send (Encrypted Content)
+    Note over Server: Verifies Key & Stores Message
+    
+    UserB->>Server: GET /poll (Long Polling)
+    Server-->>UserB: Returns New Messages
+    Note over UserB: Decrypts Content
+```
 
 ## Deployment Guide
 

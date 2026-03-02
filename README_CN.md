@@ -10,6 +10,7 @@
 
 ## 目录
 - [功能特性](#功能特性)
+- [工作原理](#工作原理)
 - [部署选项](#部署选项)
   - [选项 1: Cloudflare Workers (推荐)](#选项-1-cloudflare-workers-推荐)
   - [选项 2: Docker / VPS (自建服务器)](#选项-2-docker--vps-自建服务器)
@@ -24,6 +25,41 @@
 - **隐私优先**: 消息通过您的私有连接密钥进行隔离。
 - **免运维**: Serverless 架构，无需管理服务器。
 - **一键部署**: 2 分钟内完成设置。
+
+## 工作原理
+
+### 1. 频道隔离 (Channel Isolation)
+您的 **连接密钥 (Connection Key)** 是定义“聊天室”的唯一标识。它会被哈希处理生成唯一的频道 ID，确保只有使用相同密钥的人才能相互通信。
+
+```mermaid
+graph TD
+    Key[Connection Key: "my-secret-password"] -->|SHA-256 Hash| ChannelID[Channel ID: "a8f3..."]
+    UserA[User A] -->|Uses Key| ChannelID
+    UserB[User B] -->|Uses Key| ChannelID
+    
+    ChannelID -->|Isolated| Messages[(Messages Database)]
+    
+    style Key fill:#f9f,stroke:#333,stroke-width:2px
+    style ChannelID fill:#bbf,stroke:#333,stroke-width:2px
+```
+
+### 2. 消息流程 (Message Flow)
+服务器作为中继站。它接收加密消息并暂存，直到接收者通过长轮询 (Long Polling) 取走消息。
+
+```mermaid
+sequenceDiagram
+    participant UserA as User A (Sender)
+    participant Server as Relay Server
+    participant UserB as User B (Receiver)
+
+    Note over UserA: Encrypts Audio/Text
+    UserA->>Server: POST /send (Encrypted Content)
+    Note over Server: Verifies Key & Stores Message
+    
+    UserB->>Server: GET /poll (Long Polling)
+    Server-->>UserB: Returns New Messages
+    Note over UserB: Decrypts Content
+```
 
 ## 部署选项
 
