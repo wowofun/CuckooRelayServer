@@ -33,7 +33,7 @@
 
 ```mermaid
 graph TD
-    Key[Connection Key: "my-secret-password"] -->|SHA-256 Hash| ChannelID[Channel ID: "a8f3..."]
+    Key["Connection Key: 'my-secret-password'"] -->|SHA-256 Hash| ChannelID["Channel ID: 'a8f3...'"]
     UserA[User A] -->|Uses Key| ChannelID
     UserB[User B] -->|Uses Key| ChannelID
     
